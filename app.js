@@ -7,6 +7,7 @@ const pgSession = require('connect-pg-simple')(session);
 // const passport = require('passport');
 //const LocalStrategy = require('passport-local');
 require('dotenv').config();
+const usersRouter = require('./routes/indexRouter');
 
 const pool = new Pool({
 	connectionString: process.env.DB_URL,
@@ -28,8 +29,6 @@ app.use(
 	})
 );
 
-app.get('/', (req, res) => {
-	res.render('index');
-});
+app.use('/', usersRouter);
 
 app.listen(3000, () => console.log('App listening on localhost:3000'));

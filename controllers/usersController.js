@@ -1,5 +1,9 @@
 const db = require('../models/userModel');
 
+const signUpPageGet = async (req, res, next) => {
+	res.render('signUp');
+};
+
 const createUser = async (req, res, next) => {
 	try {
 		await db.createUser(
@@ -16,5 +20,6 @@ const createUser = async (req, res, next) => {
 };
 
 module.exports = {
-    createUser
-}
+	signUpPageGet,
+	createUser,
+};

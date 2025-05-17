@@ -28,7 +28,7 @@ app.use(
 		cookie: { maxAge: 1000 * 60 * 60 * 24 * 5 },
 	})
 );
-
-app.use('/', usersRouter);
-
+app.use(express.urlencoded({ extended: true }));
+app.use('/sign-up', usersRouter);
+app.get('/', (req, res) => res.render('index'));
 app.listen(3000, () => console.log('App listening on localhost:3000'));

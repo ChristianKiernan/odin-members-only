@@ -1,7 +1,7 @@
-const db = require('../models/userModel');
-const passport = require('passport');
 const bcrypt = require('bcryptjs');
 const { body, validationResult } = require('express-validator');
+const db = require('../models/userModel');
+const passport = require('passport');
 
 const validateInput = [
 	body('username').custom(async (value) => {

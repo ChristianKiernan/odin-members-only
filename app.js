@@ -1,12 +1,11 @@
-/* eslint-disable no-undef */
-const path = require('node:path');
 const express = require('express');
-const session = require('express-session');
-const { Pool } = require('pg');
-const pgSession = require('connect-pg-simple')(session);
 const passport = require('passport');
+const path = require('node:path');
+const pgSession = require('connect-pg-simple')(session);
+const { Pool } = require('pg');
 require('dotenv').config();
 require('./config/passport');
+const session = require('express-session');
 const usersRouter = require('./routes/usersRouter');
 
 const pool = new Pool({

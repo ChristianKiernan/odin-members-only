@@ -7,7 +7,7 @@ const pgSession = require('connect-pg-simple')(session);
 // const passport = require('passport');
 //const LocalStrategy = require('passport-local');
 require('dotenv').config();
-const usersRouter = require('./routes/indexRouter');
+const usersRouter = require('./routes/usersRouter');
 
 const pool = new Pool({
 	connectionString: process.env.DB_URL,

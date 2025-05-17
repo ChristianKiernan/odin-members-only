@@ -5,4 +5,4 @@ const usersRouter = Router();
 usersRouter.get('/', (req, res) => res.render('sign-up'));
 usersRouter.post('/', usersController.createUser);
 
-module.exports = indexRouter;
+module.exports = usersRouter;

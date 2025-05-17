@@ -1,15 +1,24 @@
 const db = require('../models/userModel');
 const passport = require('passport');
-const bcrypt = require("bcryptjs");
+const bcrypt = require('bcryptjs');
 
 const signUpPageGet = async (req, res, next) => {
 	res.render('signUp');
 };
 
 const logIn = passport.authenticate('local', {
-	successRedirect: '/success',
-	failureRedirect: '/'
+	successRedirect: '/',
+	failureRedirect: '/',
 });
+
+const logOut = (req, res, next) => {
+	req.logout((err) => {
+		if (err) {
+			return next(err);
+		}
+		res.redirect('/');
+	});
+};
 
 const createUser = async (req, res, next) => {
 	const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -31,4 +40,5 @@ module.exports = {
 	signUpPageGet,
 	createUser,
 	logIn,
+	logOut,
 };

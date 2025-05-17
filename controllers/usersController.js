@@ -1,8 +1,14 @@
 const db = require('../models/userModel');
+const passport = require('passport');
 
 const signUpPageGet = async (req, res, next) => {
 	res.render('signUp');
 };
+
+const logIn = passport.authenticate('local', {
+	successRedirect: '/success',
+	failureRedirect: '/'
+});
 
 const createUser = async (req, res, next) => {
 	try {
@@ -22,4 +28,5 @@ const createUser = async (req, res, next) => {
 module.exports = {
 	signUpPageGet,
 	createUser,
+	logIn,
 };

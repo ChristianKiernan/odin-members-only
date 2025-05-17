@@ -4,9 +4,9 @@ const express = require('express');
 const session = require('express-session');
 const { Pool } = require('pg');
 const pgSession = require('connect-pg-simple')(session);
-// const passport = require('passport');
-//const LocalStrategy = require('passport-local');
+const passport = require('passport');
 require('dotenv').config();
+require('./config/passport');
 const usersRouter = require('./routes/usersRouter');
 
 const pool = new Pool({
@@ -28,7 +28,8 @@ app.use(
 		cookie: { maxAge: 1000 * 60 * 60 * 24 * 5 },
 	})
 );
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
-app.use('/sign-up', usersRouter);
-app.get('/', (req, res) => res.render('index'));
+app.use('/', usersRouter);
 app.listen(3000, () => console.log('App listening on localhost:3000'));

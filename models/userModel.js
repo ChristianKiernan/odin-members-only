@@ -8,6 +8,15 @@ const createUser = async (firstName, lastName, username, hashedPassword) => {
 	return result.rows[0];
 };
 
+const getUserByUsername = async (username) => {
+	const result = await pool.query(
+		'SELECT * FROM membersonly_users WHERE username = $1',
+		[username]
+	);
+	return result.rows[0];
+};
+
 module.exports = {
 	createUser,
+	getUserByUsername,
 };

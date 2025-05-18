@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const usersController = require('../controllers/usersController');
 const usersRouter = Router();
-const { isAuth, isMember } = require('../middleware/auth');
+const { isAuth } = require('../middleware/auth');
 
 usersRouter.get('/', (req, res) => res.render('index', { user: req.user }));
 usersRouter.get('/sign-up', usersController.signUpPageGet);

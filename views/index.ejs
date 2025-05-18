@@ -1,62 +1,70 @@
-<% if (user) { %>
-	<h1>Welcome Back, <%= user.username %>!</h1>
+<%- include('partials/messages') %> <% if (user) { %>
+<h1>Welcome Back, <%= user.username %>!</h1>
 
-	<section>
-		<h2>Post a Message</h2>
-		<form action="/message" method="POST">
-			<label for="title">Title</label>
-			<input type="text" name="title" id="title" required />
+<section>
+	<h2>Post a Message</h2>
+	<form action="/message" method="POST">
+		<label for="title">Title</label>
+		<input type="text" name="title" id="title" required />
 
-			<label for="text">Message</label>
-			<textarea name="text" id="text" required></textarea>
+		<label for="text">Message</label>
+		<textarea name="text" id="text" required></textarea>
 
-			<button type="submit">Post Message</button>
-		</form>
-	</section>
-
-	<% if (!user.is_member) { %>
-		<p><a href="/become-member">Become a Member</a></p>
-	<% } %>
-
-	<p><a href="/log-out">Log Out</a></p>
-<% } else { %>
-	<h1>Please log in to continue</h1>
-	<form action="/log-in" method="POST">
-		<label for="username">Username</label>
-		<input id="username" name="username" placeholder="username" type="text" required />
-
-		<label for="password">Password</label>
-		<input id="password" name="password" type="password" required />
-
-		<button type="submit">Log In</button>
+		<button type="submit">Post Message</button>
 	</form>
+</section>
 
-	<h2>Or <a href="/sign-up">Sign Up</a> here</h2>
+<% if (!user.is_member) { %>
+<p><a href="/become-member">Become a Member</a></p>
+<% } %>
+
+<p><a href="/log-out">Log Out</a></p>
+<% } else { %>
+<h1>Please log in to continue</h1>
+<form action="/log-in" method="POST">
+	<label for="username">Username</label>
+	<input
+		id="username"
+		name="username"
+		placeholder="username"
+		type="text"
+		required
+	/>
+
+	<label for="password">Password</label>
+	<input id="password" name="password" type="password" required />
+
+	<button type="submit">Log In</button>
+</form>
+
+<h2>Or <a href="/sign-up">Sign Up</a> here</h2>
 <% } %>
 
 <hr />
 
 <h2>Messages</h2>
 <% if (messages && messages.length > 0) { %>
-	<ul>
-		<% messages.forEach(msg => { %>
-			<li>
-				<strong><%= msg.title %></strong><br />
-				<%= msg.text %><br />
+<ul>
+	<% messages.forEach(msg => { %>
+	<li>
+		<strong><%= msg.title %></strong><br />
+		<%= msg.text %><br />
 
-				<% if (user?.is_member || user?.is_admin) { %>
-					<em>by <%= msg.first_name %> <%= msg.last_name %></em><br />
-					<em><%= new Date(msg.timestamp).toLocaleString() %></em><br />
-				<% } %>
-
-				<% if (user?.is_admin) { %>
-					<form action="/message/<%= msg.id %>/delete" method="POST" style="display:inline;">
-						<button type="submit">Delete</button>
-					</form>
-				<% } %>
-			</li>
-		<% }); %>
-	</ul>
+		<% if (user?.is_member || user?.is_admin) { %>
+		<em>by <%= msg.first_name %> <%= msg.last_name %></em><br />
+		<em><%= new Date(msg.timestamp).toLocaleString() %></em><br />
+		<% } %> <% if (user?.is_admin) { %>
+		<form
+			action="/message/<%= msg.id %>/delete"
+			method="POST"
+			style="display: inline"
+		>
+			<button type="submit">Delete</button>
+		</form>
+		<% } %>
+	</li>
+	<% }); %>
+</ul>
 <% } else { %>
-	<p>No messages yet.</p>
+<p>No messages yet.</p>
 <% } %>

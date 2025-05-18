@@ -2,7 +2,7 @@ const pool = require('../config/db');
 
 const createUser = async (firstName, lastName, username, hashedPassword, isAdmin) => {
 	const result = await pool.query(
-		'INSERT INTO membersonly_users(first_name, last_name, username, password) VALUES($1, $2, $3, $4)',
+		'INSERT INTO membersonly_users(first_name, last_name, username, password, is_admin) VALUES($1, $2, $3, $4, $5)',
 		[firstName, lastName, username, hashedPassword, isAdmin]
 	);
 	return result.rows[0];

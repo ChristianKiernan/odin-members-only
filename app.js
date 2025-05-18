@@ -1,11 +1,12 @@
 const express = require('express');
 const passport = require('passport');
 const path = require('node:path');
-const pgSession = require('connect-pg-simple')(session);
 const { Pool } = require('pg');
 require('dotenv').config();
 require('./config/passport');
 const session = require('express-session');
+const pgSession = require('connect-pg-simple')(session);
+const messagesRouter = require('./routes/messagesRouter')
 const usersRouter = require('./routes/usersRouter');
 
 const pool = new Pool({
@@ -30,5 +31,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
+app.use('/', messagesRouter);
 app.use('/', usersRouter);
 app.listen(3000, () => console.log('App listening on localhost:3000'));

@@ -1,5 +1,27 @@
-<% if (locals.user) {%>
+<h2>Messages</h2>
+<% if (messages && messages.length > 0) { %>
+<ul>
+	<% messages.forEach(msg => { %>
+	<li>
+		<strong><%= msg.title %></strong><br />
+		<%= msg.text %><br />
+		<em>by <%= msg.first_name %> <%= msg.last_name %></em>
+	</li>
+	<% }) %>
+</ul>
+<% } else { %>
+<p>No messages yet.</p>
+<% } %> <% if (locals.user) {%>
 <h1>Welcome Back, <%= user.username%>!</h1>
+<form action="/message" method="POST">
+	<label for="title">Title</label>
+	<input type="text" name="title" id="title" required />
+
+	<label for="text">Message</label>
+	<textarea name="text" id="text" required></textarea>
+
+	<button type="submit">Post Message</button>
+</form>
 <a href="/log-out">Log Out</a>
 <% } else { %>
 <h1>Please log in to continue</h1>

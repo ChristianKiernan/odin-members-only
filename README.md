@@ -2,10 +2,10 @@
 This was implemented as a submission for the NodeJS Course in the Odin Project
 (full-stack JavaScript track). It's a simple express app that allows users to
 post and view messages from other users. The focus of the project is back-end
-logic, so there is not CSS styling. 
+logic, so there is no front-end / CSS styling.
 
 ## How It's Made
-**Tech used:** PostgreSQL, Express, JavaScript, HTML, EJS
+**Tech used:** PostgreSQL, Express, JavaScript, HTML, EJS\
 The app utilizes a connection to a PostgreSQL database that stores user 
 information, and data about user messages. The app has three tiers of 
 membership. The first tier is a user (requires sign-up and log-in), the second

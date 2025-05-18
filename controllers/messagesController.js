@@ -37,7 +37,18 @@ const createMessage = [
 	},
 ];
 
+const deleteMessage = async (req, res, next) => {
+	if (!req.user?.is_admin) return res.status(403).send('Forbidden');
+	try {
+		await messageModel.deleteMessage(req.params.id);
+		res.redirect('/');
+	} catch (err) {
+		next(err);
+	}
+};
+
 module.exports = {
 	getHomePage,
 	createMessage,
+	deleteMessage,
 };

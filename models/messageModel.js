@@ -18,7 +18,12 @@ const getAllMessages = async () => {
 	return result.rows;
 };
 
+const deleteMessage = async (id) => {
+	await pool.query('DELETE FROM membersonly_messages WHERE id = $1', [id]);
+};
+
 module.exports = {
 	createMessage,
-	getAllMessages
+	getAllMessages,
+	deleteMessage
 };

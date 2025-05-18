@@ -1,5 +1,5 @@
 <h2>Become a Full Member</h2>
-<% if (error) { %>
+<% if (typeof error !== 'undefined' && error) { %>
 <p style="color: red"><%= error %></p>
 <% } %>
 <form action="/become-member" method="POST">

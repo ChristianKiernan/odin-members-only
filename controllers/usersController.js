@@ -65,7 +65,7 @@ const createUser = [
 
 
 const becomeMemberGet = (req, res) => {
-	res.render('becomeMember');
+	res.render('becomeMember', { error: null });
 };
 
 const becomeMember = async (req, res, next) => {
@@ -78,7 +78,6 @@ const becomeMember = async (req, res, next) => {
 		res.render('becomeMember', { error: 'Incorrect password' });
 	}
 };
-
 
 module.exports = {
 	signUpPageGet,

@@ -52,7 +52,8 @@ const createUser = [
 				req.body.firstName,
 				req.body.lastName,
 				req.body.username,
-				hashedPassword
+				hashedPassword,
+				req.body.is_admin ==='on',
 			);
 
 			res.redirect('/');

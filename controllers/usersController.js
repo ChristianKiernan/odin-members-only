@@ -63,9 +63,28 @@ const createUser = [
 	},
 ];
 
+
+const becomeMemberGet = (req, res) => {
+	res.render('becomeMember');
+};
+
+const becomeMember = async (req, res, next) => {
+	const secretPassword = process.env.MEMBER_SECRET;
+	if (req.body.secret === secretPassword) {
+		await db.upgradeToMember(req.user.id);
+		req.user.is_member = true; 
+		res.redirect('/');
+	} else {
+		res.render('becomeMember', { error: 'Incorrect password' });
+	}
+};
+
+
 module.exports = {
 	signUpPageGet,
 	createUser,
 	logIn,
 	logOut,
+	becomeMemberGet,
+	becomeMember
 };
